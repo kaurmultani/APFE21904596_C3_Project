@@ -35,6 +35,30 @@ class RestaurantServiceTest {
     //<<<<<<<<<<<<<<<<<<<<SEARCHING>>>>>>>>>>>>>>>>>>>>>>>>>>
     
     
+    
+   //>>>>>>>>>>>>>>>>>>>>>>SUCCESS TEST CASE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+     @Test
+    public void total_cost_success()  throws restaurantNotFoundException{
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant = service.addRestaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",150);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("Chicken Soup", 350);
+
+        // user selected item
+        ArrayList<Item> userselectedItems = new  ArrayList<Item>();
+        Item item1 = new Item("Sweet corn soup",150);
+        Item item2 = new Item("Chicken Soup", 350);
+        userselectedItems.add(item1);
+        userselectedItems.add(item2);
+        // total cost should be 500 (150+350)
+        assertEquals(restaurant.getTotalCost(userselectedItems), 500);
+        //WRITE UNIT TEST CASE HERE
+    }
+    
+ //<<<<<<<<<<<<<<<<<<<<SUCCESS TEST CASE>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
  //>>>>>>>>>>>>>>>>>>>>>>FAILED TEST CASE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Test
     public void total_cost_failed() throws restaurantNotFoundException {
